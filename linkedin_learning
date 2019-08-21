@@ -6,12 +6,20 @@ import aiohttp.cookiejar
 import lxml.html
 import re
 import os
+import argparse
+import sys
 import logging
 
 from itertools import chain, filterfalse, starmap
 from collections import namedtuple
 from urllib.parse import urljoin
-from config import USERNAME, PASSWORD, COURSES, PROXY, BASE_DOWNLOAD_PATH
+
+USERNAME = '...'
+PASSWORD = '...'
+COURSES = []
+USE_PROXY = False
+PROXY = "http://127.0.0.1:8888" if USE_PROXY else None
+BASE_DOWNLOAD_PATH = os.path.join(os.path.dirname(__file__), "downloads")
 
 logging.basicConfig(level=logging.DEBUG, format='%(asctime)s %(name)-12s %(levelname)-8s %(message)s')
 
@@ -227,23 +235,13 @@ async def process(courses=COURSES, userName=USERNAME, password=PASSWORD):
 
 
 if __name__ == "__main__":
-    import argparse
-    import sys
     parser = argparse.ArgumentParser()
-    parser.add_argument('-c', '--courses', nargs='*', help='Include course slugs to download them all')
-    parser.add_argument('-u', '--user', help='Account user name')
-    parser.add_argument('-p', '--password', help='Account password')
+    parser.add_argument('-c', '--courses', nargs='*', help='Include course slugs to download them all', default=COURSES)
+    parser.add_argument('-u', '--user', help='Account user name', default=USERNAME)
+    parser.add_argument('-p', '--password', help='Account password', default=PASSWORD)
+    parser.add_argument('--use-proxy', help='Enable using proxy', default=USE_PROXY)
+    parser.add_argument('-dp', '--download-path', help='Set path of the downloads', default=BASE_DOWNLOAD_PATH)
     args = parser.parse_args()
-
-    user = USERNAME
-    password = PASSWORD
-    courses = COURSES
-    if args.courses:
-        courses = args.courses
-    if args.user:
-        user = args.user
-    if args.password:
-        password = args.password
-    print(f'Downloading courses: {courses}')
+    print(f'Downloading courses: {args.courses}')
     loop = asyncio.get_event_loop()
-    loop.run_until_complete(process(courses, user, password))
+    loop.run_until_complete(process(args.courses, args.user, args.password))
