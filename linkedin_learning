@@ -209,10 +209,10 @@ async def download_file(url, output):
                     os.remove(output)
 
 
-async def process(courses=COURSES):
+async def process(courses=COURSES, userName=USERNAME, password=PASSWORD):
     try:
         logging.info("[*] -------------Login-------------")
-        await login(USERNAME, PASSWORD)
+        await login(userName, password)
         logging.info("[*] -------------Done-------------")
 
         logging.info("[*] -------------Fetching Course-------------")
@@ -230,15 +230,20 @@ if __name__ == "__main__":
     import argparse
     import sys
     parser = argparse.ArgumentParser()
-    parser.add_argument('--courses', nargs='*', help='foo help')
+    parser.add_argument('-c', '--courses', nargs='*', help='Include course slugs to download them all')
+    parser.add_argument('-u', '--user', help='Account user name')
+    parser.add_argument('-p', '--password', help='Account password')
     args = parser.parse_args()
-    if len(sys.argv) == 1:
-        print('Loading courses from CONFIG file.')
-        loop = asyncio.get_event_loop()
-        loop.run_until_complete(process())
-    else:
-        if args.courses:
-            print('Loading courses from argument')
-            print(f'Courses: {args.courses}')
-            loop = asyncio.get_event_loop()
-            loop.run_until_complete(process(args.courses))
+
+    user = USERNAME
+    password = PASSWORD
+    courses = COURSES
+    if args.courses:
+        courses = args.courses
+    if args.user:
+        user = args.user
+    if args.password:
+        password = args.password
+    print(f'Downloading courses: {courses}')
+    loop = asyncio.get_event_loop()
+    loop.run_until_complete(process(courses, user, password))

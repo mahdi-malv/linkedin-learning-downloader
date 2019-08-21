@@ -2,7 +2,7 @@ import os
 
 # EDIT
 USERNAME = '...'
-PASSWORD = 'I...'
+PASSWORD = '...'
 COURSES = [
 ]
 
