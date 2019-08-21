@@ -29,18 +29,19 @@ e.g:
 
 ##### Get courses
 
-Prompt execution permission:
+* Prompt execution permission:
 ```bash
 chmod +x linkedin_learning
 ```
 
-If you have set courses in config file:
+* If you have set courses in config file:
 ```bash
 ./linkedin_learning
 ```
 
-And alternatively, if you want to set courses using **arguments**:
+* And alternatively, if you want to set courses or user or password using **arguments** (This will override the ones in the `config.py` file):
 ```bash
-# Courses will not be loaded from CONFIG file. Instead it will download argument courses.
-./linkedin_learning --courses slug1 slug2 ...
+./linkedin_learning --user USER --password PASSWORD --courses slug1 slug2 ...
 ```
+
+To get more help run `./linkedin_learning -h`.
