@@ -23,8 +23,8 @@ Edit config.py file (username, password and courses slugs)
 
 Course's slug can be obtained using its url
 e.g:
-**COURSE URL**: https://www.linkedin.com/learning/python-advanced-design-pattern
 
+**COURSE URL**: https://www.linkedin.com/learning/python-advanced-design-pattern <br>
 **SLUG**: `python-advanced-design-pattern`
 
 ##### Get courses
