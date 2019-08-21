@@ -47,11 +47,3 @@ And alternatively, if you want to set courses using arguments:
 # Courses will not be loaded from CONFIG file. Instead it will download argument courses.
 ./linkedin_learning --courses slug1 slug2 ...
 ```
-
-
-#### TODO
-
- - ~~Add Subtitles~~
- - Add Description
- - Use argparser
- - Fetch courses from bookmarks
