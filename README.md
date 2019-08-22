@@ -19,23 +19,22 @@ Make sure your LinkedIn account is **NOT** protected with 2FA
 #### Usage
 > pip install -r requirements.txt
 
-Edit config.py file (username, password and courses slugs)  
-
 Course's slug can be obtained using its url
-e.g:
-
+e.g:<br>
 **COURSE URL**: https://www.linkedin.com/learning/python-advanced-design-pattern <br>
 **SLUG**: `python-advanced-design-pattern`
 
-##### Get courses
+##### Download courses
 
 * Prompt execution permission:
 ```bash
 chmod +x linkedin_learning
 ```
-
+Run the command:
 ```groovy
 linkedin_learning --user USER --password PASSWORD --courses slug1 slug2
 ```
 
 To get more help run `./linkedin_learning -h`.
+
+**Note**: `/usr/bin/python` is set. So if you have your python3 at somewhere else like `/usr/bin/python3`, change it.
